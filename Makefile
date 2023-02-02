@@ -5,3 +5,11 @@ build:
 .PHONY: clean
 clean:
 	rm -rf build
+
+.PHONY: run
+run: clean build
+	./build/blurhash-server-bin
+
+.PHONY: check
+check:
+	find ${PWD} -name *.c | xargs clang-check
