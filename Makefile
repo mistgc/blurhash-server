@@ -13,3 +13,10 @@ run: clean build
 .PHONY: check
 check:
 	find ${PWD} -name *.c | xargs clang-check
+
+.PHONY: containerlize
+containerlize:
+	mkdir tmp
+	cp Dockerfile tmp/Dockerfile
+	sed -i 's/ADD . \/app/ADD .. \/app/g' tmp/Dockerfile
+	docker build -t 'blurhash-server:latest' .
