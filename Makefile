@@ -1,5 +1,5 @@
 .PHONY: build
-build:
+build: clean
 	meson build && ninja -v -j8 -C build
 
 .PHONY: clean

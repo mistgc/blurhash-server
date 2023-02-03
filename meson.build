@@ -1,6 +1,7 @@
 project('blurhash-server', 'c')
 
 math = meson.get_compiler('c').find_library('m', static: true)
+threads = dependency('threads', static: true)
 
 inc = include_directories('include')
 src = files(
@@ -21,5 +22,5 @@ executable(
     '-static',
   ],
   include_directories: inc,
-  dependencies: [ math, facilio_dep ],
+  dependencies: [ math, facilio_dep, threads ],
 )
