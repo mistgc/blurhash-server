@@ -23,6 +23,9 @@ facilio_inc = include_directories('include')
 facilio = static_library(
   'facilio',
   facilio_src,
+  link_args: [
+    '-static'
+  ],
   include_directories: facilio_inc,
 )
 

@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	CCACHE_DIR=${PWD}/.cache/ccache CC="ccache clang" meson build && ninja -v -j8 -C build; ccache -d ${PWD}/.cache/ccache -s
+	meson build && ninja -v -j8 -C build
 
 .PHONY: clean
 clean:
@@ -15,8 +15,6 @@ check:
 	find ${PWD} -name *.c | xargs clang-check
 
 .PHONY: containerlize
-containerlize:
-	mkdir tmp
-	cp Dockerfile tmp/Dockerfile
-	sed -i 's/ADD . \/app/ADD .. \/app/g' tmp/Dockerfile
+containerlize: build
 	docker build -t 'blurhash-server:latest' .
+	rm -rf build
